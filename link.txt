@@ -1,0 +1,2 @@
+https://www.youtube.com/watch?v=XqkqbsdtoMI
+Title: Django-Ninja APIs - Modern API Development in Django
