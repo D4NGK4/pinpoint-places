@@ -1,13 +1,27 @@
+import uuid
 from django.db import models
+from django_extensions.db.fields import AutoSlugField 
 
 # Create your models here.
 
 class Location(models.Model):
-    latitude = models.DecimalField(max_digits=8, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
-
-class Place(models.Model):
-    name = models.CharField(max_length=255, primary_key=True, unique=True, editable=True)
+    name = models.CharField(max_length=200)
     
+    def __str__(self):
+        return self.name
+    
+class Device(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=200)
+    slug = AutoSlugField(populate_from='name')
+    location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.name} - {self.id}"
+    
+    
+    
+
+
     
 
